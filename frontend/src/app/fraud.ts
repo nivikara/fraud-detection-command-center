@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class FraudService {
-  private apiUrl = 'http://127.0.0.1:5000'; 
+  private apiUrl = 'https://fraud-detection-api-vmcl.onrender.com'; 
 
   constructor(private http: HttpClient) {}
 
