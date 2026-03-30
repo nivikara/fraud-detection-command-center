@@ -1,0 +1,122 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>💳 Fraud Detection in Credit Card Transaction</h1>
+    <p>Real-time financial transaction monitoring</p>
+  </header>
+
+  <div class="content-grid">
+    <div class="card">
+      <div class="card-header">
+        <h2>Quick Check</h2>
+        <span class="badge blue">Manual Entry</span>
+      </div>
+      
+      <div class="form-group">
+        <label>Transaction Amount (₹)</label>
+        <input type="number" [(ngModel)]="amount" placeholder="e.g., 5000" class="styled-input" min="0">
+      </div>
+      
+      <div class="form-group">
+        <label>Time (Hour 0-24)</label>
+        <input type="number" [(ngModel)]="time" placeholder="e.g., 12" class="styled-input" min="0" max="24">
+      </div>
+
+      <div class="form-group">
+        <label>Transaction Type</label>
+        <select [(ngModel)]="transactionType" class="styled-input">
+          <option value="PAYMENT">Payment</option>
+          <option value="TRANSFER">Transfer</option>
+          <option value="CASH_OUT">Cash Out</option>
+          <option value="CASH_IN">Cash In</option>
+          <option value="DEBIT">Debit</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Previous Account Balance (₹)</label>
+        <input type="number" [(ngModel)]="oldBalance" placeholder="e.g., 150000" class="styled-input" min="0">
+      </div>
+      
+      <button class="btn primary-btn" (click)="checkFraud()">Analyze Transaction</button>
+
+      @if (result) {
+        <div class="result-box" [ngClass]="{'fraud-alert': result === 'Fraud', 'safe-alert': result !== 'Fraud'}">
+          <h3>Analysis Result: <strong>{{ result }}</strong></h3>
+        </div>
+      }
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2>Batch Analysis</h2>
+        <span class="badge purple">CSV Dataset</span>
+      </div>
+      
+      <div class="upload-zone">
+        <input type="file" id="file-upload" (change)="onFileSelected($event)" hidden>
+        <label for="file-upload" class="upload-label" [ngStyle]="{'background-color': selectedFileName ? '#e8f5e9' : '', 'border-color': selectedFileName ? '#4caf50' : ''}">
+          @if (selectedFileName) {
+            <svg class="upload-icon" style="color: #4caf50;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span style="font-weight: bold; color: #2e7d32;">{{ selectedFileName }}</span>
+          } @else {
+            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            <span>Select Financial Dataset</span>
+          }
+        </label>
+        <button class="btn secondary-btn" (click)="upload()">Upload & Detect Fraud</button>
+      </div>
+    </div>
+  </div>
+
+  <pre style="background: #333; color: #0f0; padding: 10px; border-radius: 5px; margin-top: 20px;">
+    System Data Check: Found {{ results.length || 0 }} rows.
+  </pre>
+
+  @if (results.length > 0) {
+    <div class="card table-card">
+      
+      <div class="chart-container" style="max-width: 350px; margin: 0 auto 2rem auto;">
+        <h3 style="text-align: center; margin-bottom: 1rem;">Batch Overview</h3>
+        <canvas id="fraudChart"></canvas>
+      </div>
+
+      <h2>Batch Analysis Results</h2>
+      <div class="table-responsive">
+        <table class="data-table">
+          
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Amount (₹)</th>
+              <th>Old Balance (₹)</th>
+              <th>Time</th>
+              <th>Risk Status</th>
+            </tr>
+          </thead>
+          
+          <tbody>
+            @for (row of results; track row) {
+              <tr>
+                <td><strong>{{ row.type }}</strong></td>
+                <td>{{ row.amount }}</td>
+                <td>{{ row.oldbalance }}</td>
+                <td>{{ row.time }}</td>
+                <td>
+                  <span class="status-badge" 
+                        [ngClass]="{'fraud-badge': row.result === 'Fraud', 'safe-badge': row.result !== 'Fraud'}">
+                    {{ row.result === 'Fraud' ? 'Fraud' : 'Safe' }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  }
+</div>

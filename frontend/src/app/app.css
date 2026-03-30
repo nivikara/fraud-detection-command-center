@@ -1,0 +1,262 @@
+/* Base Dashboard Layout */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #1a1a1a;
+}
+
+.dashboard-header p {
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e9ecef;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.75rem;
+}
+
+.card-header h2 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+/* Inputs & Forms */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.styled-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.styled-input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.primary-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.primary-btn:hover {
+  background-color: #0056b3;
+}
+
+.secondary-btn {
+  background-color: #6c757d;
+  color: white;
+  margin-top: 1rem;
+}
+
+.secondary-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Custom Upload Zone */
+.upload-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 120px;
+  border: 2px dashed #007bff;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #f0f7ff;
+  color: #007bff;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.upload-label:hover {
+  background-color: #e0efff;
+}
+
+.upload-icon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 0.5rem;
+}
+
+/* Result Alerts & Badges */
+.result-box {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.fraud-alert {
+  background-color: #ffe6e6;
+  border: 1px solid #ffcccc;
+  color: #cc0000;
+}
+
+.safe-alert {
+  background-color: #e6ffe6;
+  border: 1px solid #ccffcc;
+  color: #008000;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.badge.blue { background-color: #cce5ff; color: #004085; }
+.badge.purple { background-color: #e2d9f3; color: #4b0082; }
+
+/* Table Styling */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.data-table th, .data-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap; /* Keeps the text from wrapping tightly */
+}
+
+.data-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #555;
+}
+
+.data-table tr:hover {
+  background-color: #fdfdfd;
+}
+
+.fraud-row {
+  background-color: #fff5f5 !important;
+}
+
+.status-badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.fraud-badge {
+  background-color: #ffcccc;
+  color: #cc0000;
+}
+
+.safe-badge {
+  background-color: #ccffcc;
+  color: #008000;
+} 
+
+/* -----------------------------------------
+   🟢 NEW FIXES: Chart & Dropdown Styling 
+   ----------------------------------------- */
+
+/* Dropdown Menu Styling */
+select.styled-input {
+  padding: 12px;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  appearance: auto; 
+}
+
+/* Tame the Chart.js Canvas */
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 300px; 
+  margin: 0 auto 2rem auto; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+canvas#fraudChart {
+  max-height: 250px !important; 
+}

@@ -1,0 +1,10 @@
+# Python ignores
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Database (We want the live server to create a fresh one)
+*.db
+*.sqlite3
